@@ -5,6 +5,8 @@ services:
       - ./data/mysql:/var/lib/mysql
     environment:
       - MYSQL_ROOT_PASSWORD=Passw0rd
+    ports:
+      - 3306:3306
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
