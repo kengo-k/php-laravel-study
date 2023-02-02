@@ -1,3 +1,5 @@
+# Laravelのインストール
+
 ```
 $ sudo apt-get install composer php-curl
 $ composer create-project laravel/laravel hello
@@ -22,3 +24,22 @@ $ php artisan key:generate
 ```
 
 再度画面にアクセスしたところ正常動作していると思われる画面が表示された。
+
+# 初期設定
+
+## タイムゾーンとロケールの設定
+
+`confit/app.php`の`timezone`を変更する
+
+```php
+'timezone' => 'Asia/Tokyo',
+'locale' => 'ja',
+```
+
+## デバッグバーのインストール
+
+```
+$ composer require barryvdh/laravel-debugbar:^3.7
+```
+
+インストール後にサーバを起動すると画面の下部にデバッグ用のツールバーが表示されていることが確認できる。
