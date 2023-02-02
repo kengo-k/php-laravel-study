@@ -54,3 +54,13 @@ APP_DEBUG=true
 $ php artisan config:clear
 $ php artisan cache:clear
 ```
+
+## MySQLとPHPMyAdminのインストール
+
+`database/docker-compose.yaml`を使用してインストールを行う。
+
+```
+$ docker-compose up -d
+```
+
+起動後、`http://localhost:4040`にアクセスしてPHPMyAdminの画面が表示されればOK。
