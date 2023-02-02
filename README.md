@@ -42,4 +42,15 @@ $ php artisan key:generate
 $ composer require barryvdh/laravel-debugbar:^3.7
 ```
 
-インストール後にサーバを起動すると画面の下部にデバッグ用のツールバーが表示されていることが確認できる。
+インストール後にサーバを起動すると画面の下部にデバッグ用のツールバーが表示されていることが確認できる。デバッグバーをoffにする場合は`.env`の下記の値を切り替えること。
+
+```
+APP_DEBUG=true
+```
+
+基本的には`.env`を書き換えて画面をリロードすれば反映されるが、値を変更しても切り替わらない場合はキャッシュをクリアすること。
+
+```
+$ php artisan config:clear
+$ php artisan cache:clear
+```
