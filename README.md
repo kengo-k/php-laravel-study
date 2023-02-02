@@ -1,7 +1,7 @@
 # Laravelのインストール
 
 ```
-$ sudo apt-get install composer php-curl
+$ sudo apt-get install composer php-curl php-mysql
 $ composer create-project laravel/laravel hello
 $ sudo apt-get install php-xml # いらないかも？
 $ composer require laravel/pint --dev # いらないかも
