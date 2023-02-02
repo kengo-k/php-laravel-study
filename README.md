@@ -64,3 +64,17 @@ $ docker-compose up -d
 ```
 
 起動後、`http://localhost:4040`にアクセスしてPHPMyAdminの画面が表示されればOK。
+
+## 開発用データベースとユーザを作成
+
+PHPMyAdminから新規データベースとアクセス用ユーザを作成する。作成した内容に合わせて`.env`の該当項目を修正する。
+
+- DB_DATABASE=hello
+- DB_USERNAME=hello
+- DB_PASSWORD=PassW0rd123
+
+設定後、下記コマンドを実行しマイグレーションが正常に行えるかどうか確認する。
+
+```
+$ php artisan migrate
+```
