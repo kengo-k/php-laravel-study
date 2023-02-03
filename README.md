@@ -98,3 +98,15 @@ Route::get('/', function () {
 `php artisan list`で使用できるコマンドの一覧が確認できる
 
 これまでに使用してきた`php artisan serve`や`php artisan migrate`なども表示されていることが確認できる。
+
+### Modelを作成する
+
+`php artisan make:model <モデル名>`でModelを生成できる。
+
+```
+$ php artisan make:model Test
+
+   INFO  Model [app/Models/Test.php] created successfully.
+```
+
+※`php artisan make:model <モデル名> -mc`でマイグレーションとコントローラも同時に作成できる。
