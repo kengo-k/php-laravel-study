@@ -92,3 +92,9 @@ Route::get('/', function () {
 ```
 
 上記の記述から`/`にアクセスすると`welcome`のビューを表示しようとしていることがわかる。ビューは`resources/views`に存在する。ビューファイルは`welcome.blade.php`のように`*.blade.php`の拡張子を持つ。
+
+## artisanコマンド
+
+`php artisan list`で使用できるコマンドの一覧が確認できる
+
+これまでに使用してきた`php artisan serve`や`php artisan migrate`なども表示されていることが確認できる。
