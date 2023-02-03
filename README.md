@@ -78,3 +78,17 @@ PHPMyAdminから新規データベースとアクセス用ユーザを作成す�
 ```
 $ php artisan migrate
 ```
+
+# Laravelの基本知識
+
+## Routing
+
+`routes/web.php`にルーティングの設定が記述されている。
+
+```php
+Route::get('/', function () {
+    return view('welcome');
+});
+```
+
+上記の記述から`/`にアクセスすると`welcome`のビューを表示しようとしていることがわかる。ビューは`resources/views`に存在する。ビューファイルは`welcome.blade.php`のように`*.blade.php`の拡張子を持つ。
