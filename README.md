@@ -160,3 +160,36 @@ PHPMyAdminから`tests`テーブルが追加されていることが確認でき
 - php artisan migrate:refresh
 
 `fresh`はテーブルをすべて削除して再作成しなおす。`refresh`はロールバックしてから再生成する。
+
+## tinkerで簡単なDB操作を行う
+
+`tinker`は対話型コマンドラインで簡単なDB操作を行うことができる。
+
+```
+$ php artisan tinker
+Psy Shell v0.11.12 (PHP 8.1.2-1ubuntu2.10 — cli) by Justin Hileman
+> $test = new App\Models\Test;
+= App\Models\Test {#3745}
+
+> $test->text = "Hello!";
+= "Hello!"
+
+> $test->save();
+= true
+
+> App\Models\Test::all();
+= Illuminate\Database\Eloquent\Collection {#4441
+    all: [
+      App\Models\Test {#4695
+        id: 1,
+        text: "Hello!",
+        created_at: "2023-02-03 23:50:37",
+        updated_at: "2023-02-03 23:50:37",
+      },
+    ],
+  }
+
+> exit
+
+   INFO  Goodbye.
+```
