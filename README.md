@@ -169,6 +169,31 @@ $ php artisan make:controller TestController
    INFO  Controller [app/Http/Controllers/TestController.php] created successfully.
 ```
 
+### ControllerからVIewを表示する
+
+作成したControllerにさらにViewを加えて画面を表示してみる。まずは作成したControllerを使うようにルーティングを追加する。
+
+```php
+use App\Http\Controllers\TestController;
+Route::get('tests/test', [TestController::class, 'index']);
+```
+
+見たままの内容だが`tests/test`にアクセスされた際は`TestController`の`index`メソッドが呼び出されるようになる。自動生成されたControllerには`index`メソッドを定義していないので実装を追加する。
+
+```php
+class TestController extends Controller
+{
+    // 追加
+    public function index()
+    {
+        return view('tests.test');
+    }
+}
+```
+
+`view`関数で指定している`tests.test`はViewディレクトリ(`resources/views`)内の`tests`サブディレクトリの`test`ファイルを表示する、という指定になる。`test`ファイルは前述した拡張子を持つためファイル名としては`test.blade.php`となる。とりあえず表示できることを確認できればよいので適当に中身をつくっておく。viewファイルを作成したらブラウザから`/tests/test`を指定して作成したViewの内容が表示されればOK。
+
+
 ## tinkerで簡単なDB操作を行う
 
 `tinker`は対話型コマンドラインで簡単なDB操作を行うことができる。
