@@ -161,6 +161,14 @@ PHPMyAdminから`tests`テーブルが追加されていることが確認でき
 
 `fresh`はテーブルをすべて削除して再作成しなおす。`refresh`はロールバックしてから再生成する。
 
+### Controllerを作成する
+
+```
+$ php artisan make:controller TestController
+
+   INFO  Controller [app/Http/Controllers/TestController.php] created successfully.
+```
+
 ## tinkerで簡単なDB操作を行う
 
 `tinker`は対話型コマンドラインで簡単なDB操作を行うことができる。
