@@ -235,7 +235,7 @@ compact() は現在のシンボルテーブルにおいてその名前を有す�
 
 Testテーブルの内容が表示されればOK。
 
-## データベース周りの処理(ORM)
+## Eroquent(ORM)によるDB処理
 
 上述したデータ取得処理では`Test::All()`によってTestテーブルの一覧を取得していたが、この処理はLaravelのORMである`Eloquent`のメソッド呼び出しとなる。`All`メソッドは`Collection`型を返す。実際に内容を確認してみる。
 
@@ -305,6 +305,41 @@ dd($values->get());
 出力: all()の時と同じであるため省略
 ```
 `$values->get()`のように`get`の呼び出しが追加されているのは`where`メソッドが返す型が`Collection`ではなく`Builder`というクエリを構築するビルダの型になっているためである。この場合は実際にクエリを実行するには`get`を呼ぶ必要がある。
+
+## クエリビルダによるDB処理
+
+さきほどの例ではEroquentというORMを使用してDBの処理を実装したが、より生のSQLに近い記述ができるクエリビルダを使った実装例を見ていく。
+
+```php
+use Illuminate\Support\Facades\DB;
+
+class TestController extends Controller
+{
+    // 追加
+    public function index()
+    {
+        $values = DB::table('tests')
+        ->where('text', '=', 'Hello!')
+        ->select('id', 'text')
+        ->get();
+        dd($values);
+        return view('tests.test', compact('values'));
+    }
+}
+---
+出力:
+Illuminate\Support\Collection {#375 ▼ // app/Http/Controllers/TestController.php:19
+  #items: array:1 [▼
+    0 => {#387 ▼
+      +"id": 1
+      +"text": "Hello!"
+    }
+  ]
+  #escapeWhenCastingToString: false
+}
+```
+
+取得したデータの型がEloquentのCollectionではない別の型になっていることがわかる。
 
 ## tinkerで簡単なDB操作を行う
 
