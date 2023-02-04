@@ -246,7 +246,7 @@ dd($values);
 ```
 コントローラの処理で`$values`取得後に一行処理を追加した。これで画面を再表示すると下記の出力が得られる。
 
-```
+```php
 Illuminate\Database\Eloquent\Collection {#719 ▼ // app/Http/Controllers/TestController.php:14
   #items: array:1 [▼
     0 => App\Models\Test {#1122 ▼
@@ -266,8 +266,35 @@ Illuminate\Database\Eloquent\Collection {#719 ▼ // app/Http/Controllers/TestCo
 
 Eloquentで利用可能な他のメソッドを簡単に見ていく。
 
+### 件数を取得
 
+```php
+$count = Test::count();
+dd($count);
+---
+出力:
+1 // app/Http/Controllers/TestController.php:15
+```
 
+### IDを指定して取得
+
+```php
+$first = Test::findOrFail(1);
+dd($first);
+---
+出力:
+App\Models\Test {#1364 ▼ // app/Http/Controllers/TestController.php:15
+   ...省略...
+  #attributes: array:4 [▼
+    "id" => 1
+    "text" => "Hello!"
+    "created_at" => "2023-02-03 23:50:37"
+    "updated_at" => "2023-02-03 23:50:37"
+  ]
+   ...省略...
+}
+```
+※ちなみに存在しないIDを指定した場合はLaravelのエラー画面(404)になる模様。
 
 ## tinkerで簡単なDB操作を行う
 

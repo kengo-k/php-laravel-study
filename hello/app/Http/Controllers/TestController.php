@@ -10,9 +10,9 @@ class TestController extends Controller
     // 追加
     public function index()
     {
-        $values = Test::All();
-        // 取得したデータをdd関数に渡す
-        dd($values);
+        $values = Test::all();
+        $first = Test::findOrFail(1);
+        dd($first);
         return view('tests.test', compact('values'));
     }
 }
