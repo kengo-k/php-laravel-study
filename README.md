@@ -296,6 +296,16 @@ App\Models\Test {#1364 ▼ // app/Http/Controllers/TestController.php:15
 ```
 ※ちなみに存在しないIDを指定した場合はLaravelのエラー画面(404)になる模様。
 
+### 検索条件を指定して検索
+
+```php
+$values = Test::where('text', '=', 'Hello!');
+dd($values->get());
+---
+出力: all()の時と同じであるため省略
+```
+`$values->get()`のように`get`の呼び出しが追加されているのは`where`メソッドが返す型が`Collection`ではなく`Builder`というクエリを構築するビルダの型になっているためである。この場合は実際にクエリを実行するには`get`を呼ぶ必要がある。
+
 ## tinkerで簡単なDB操作を行う
 
 `tinker`は対話型コマンドラインで簡単なDB操作を行うことができる。
