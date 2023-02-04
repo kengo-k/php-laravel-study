@@ -169,7 +169,7 @@ $ php artisan make:controller TestController
    INFO  Controller [app/Http/Controllers/TestController.php] created successfully.
 ```
 
-### ControllerからVIewを表示する
+### ControllerからViewを表示する
 
 作成したControllerにさらにViewを加えて画面を表示してみる。まずは作成したControllerを使うようにルーティングを追加する。
 
@@ -193,6 +193,45 @@ class TestController extends Controller
 
 `view`関数で指定している`tests.test`はViewディレクトリ(`resources/views`)内の`tests`サブディレクトリの`test`ファイルを表示する、という指定になる。`test`ファイルは前述した拡張子を持つためファイル名としては`test.blade.php`となる。とりあえず表示できることを確認できればよいので適当に中身をつくっておく。viewファイルを作成したらブラウザから`/tests/test`を指定して作成したViewの内容が表示されればOK。
 
+### Modelからデータを取得しViewに表示する
+
+上の例ではControllerが固定のViewを返していたため修正を加えてModel経由でデータベースの値を取得し、その値をViewに表示する。
+
+```php
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+use  App\Models\Test;
+
+class TestController extends Controller
+{
+    // 追加
+    public function index()
+    {
+        $values = Test::All();
+        return view('tests.test', compact('values'));
+    }
+}
+```
+
+`view`関数の二番目の引数が追加されていることがわかる。この処理によりView内で`$values`変数を参照できるようになっている。ちなみに`compact`関数はPHPに組み込まれている関数でドキュメントによると以下の仕様となっている。
+
+```
+compact() は現在のシンボルテーブルにおいてその名前を有する変数を探し、 変数名がキー、変数の値がそのキーに関する値となるように追加します。
+```
+
+`$values`を参照するようにViewを修正する。
+
+```php
+<ul>
+@foreach($values as $value)
+  <li>ID: {{ $value->id }}</li>
+  <li>Text: {{ $value->text }}</li>
+@endforeach
+</ul>
+```
+
+Testテーブルの内容が表示されればOK。
 
 ## tinkerで簡単なDB操作を行う
 
